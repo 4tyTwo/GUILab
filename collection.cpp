@@ -136,6 +136,7 @@ void Collection::save(QString filename){
 bool Collection::load(QString filename){
   QFile file(filename);
   if (file.exists()){
+    clear();
     file.open(QIODevice::ReadOnly | QFile::Text);
     QTextStream in(&file);
     QString str;
@@ -166,8 +167,10 @@ bool Collection::load(QString filename){
         delete tmp;
       }
     }
+    return true;
   }
-  return (bool)count;
+  else
+  return false;
 }
 
 bool Collection::check(){

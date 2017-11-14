@@ -245,7 +245,13 @@ void MainWindow::on_SaveInFileButton_clicked()
 
 void MainWindow::on_LoadFromFileButton_clicked()
 {
-    list.load(ui->loadEdit->text());
+    if (!list.load(ui->loadEdit->text())){
+      QMessageBox dialog;
+      dialog.setText("File not found");
+      dialog.setWindowTitle("Error");
+      dialog.setBaseSize(QSize(150,60));
+      dialog.exec();
+    }
     fillLog();
 }
 
