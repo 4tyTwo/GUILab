@@ -30,3 +30,11 @@ int CheckRecord::isBase(){
 void CheckRecord::setRemaining(int remain){
   remaining = (remain<0)? 0:remain;
 }
+
+QString CheckRecord::getText(){
+  timeSt curr = accessTime;
+  return QString("Remains: "
+  +QString::number(remaining)+"ml Time: "+QString::number(curr.hours)
+  +":"+QString::number(curr.minutes)+" Date: "+QString::number(curr.day)
+  +"/"+QString::number(curr.month)+"/"+QString::number(curr.year));
+}

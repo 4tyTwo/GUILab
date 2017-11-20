@@ -10,7 +10,6 @@ public:
       ,QString patronymic,QString degree,QString position,int coffeeDiff=-250);
   //Инициализирующий конструктор, полный
   Record(Record& rec);//Копирующий конструктор
-  virtual ~Record();
   QString getFirstName(); //Возвращает имя
   QString getlastname(); //Возвращает фамилию
   QString getPatronymic(); //Возвращает отчество
@@ -24,7 +23,9 @@ public:
   void setPosition(QString);//Устанавливает должность
   void setCoffeeDiff(int diff);//Устанавливает объем слитого/налитого кофе
   void copy(Record object);
+  virtual QString getText();
   virtual int isBase();
+  virtual ~Record();
 private:
   QString firstName,lastName,patronymic,degree,position; //Строки с информацией о сотруднике
   //timeSt accessTime; //Структура со следущими полями:

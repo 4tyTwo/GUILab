@@ -1,5 +1,6 @@
 #ifndef MOMENT_H
 #define MOMENT_H
+#include <QString>
 
 struct timeSt{ //Структура для описания времени
   int minutes,hours,day,month,year;
@@ -15,6 +16,7 @@ public:
   timeSt getTime(); //Возращает структуру с датой и временем записи
   virtual int isBase();
   virtual ~Moment()=0 {}
+  virtual QString getText()=0;
 protected:
   timeSt accessTime;
 };

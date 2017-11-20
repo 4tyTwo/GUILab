@@ -31,26 +31,17 @@ void MainWindow::initializeLog(){
 }
 void MainWindow::fillLog(){
   ui->coffeelog->clear();
-  QString text;
   for (int i =0;i<list.size();i++){
-    timeSt curr = list[i]->getTime();
     if (list[i]->isBase()==0){
       Record* tmp = dynamic_cast<Record*>(list[i]);
-      text="["+QString::number(i)+"] "+tmp->getFirstName()+" "+tmp->getlastname()
-      +" "+tmp->getPatronymic()+" "+tmp->getDegree()+" "+tmp->getPosition()
-      +" "+QString::number(tmp->getCoffeeDiff())+"ml Time: "
-      +QString::number(curr.hours)+":"+QString::number(curr.minutes)+" Date: "+
-      QString::number(curr.day)+"/"+QString::number(curr.month)+"/"
-      +QString::number(curr.year);
+      ui->coffeelog->addItem("["+QString::number(i)+
+      "] "+tmp->getText());
     }
     else{
       CheckRecord* tmp = dynamic_cast<CheckRecord*>(list[i]);
-      text="["+QString::number(i)+"] Remains: "
-      +QString::number(tmp->getRemaining())+"ml Time: "+QString::number(curr.hours)
-      +":"+QString::number(curr.minutes)+" Date: "+QString::number(curr.day)
-      +"/"+QString::number(curr.month)+"/"+QString::number(curr.year);
-      }
-    ui->coffeelog->addItem(text);
+      ui->coffeelog->addItem("["+QString::number(i)+
+      "] "+tmp->getText());
+    }
   }
 }
 
@@ -118,6 +109,8 @@ void MainWindow::on_SaveChanges_clicked()
     ui->DateAndTime->date().year());
     setEnabledRecordEdits(false);
     ui->SaveChanges->hide();
+    ui->coffeelog->currentItem()->setText("["+QString::number(currentItem)+
+    "] "+tmp->getText());
   }
   else{
     CheckRecord* tmp = dynamic_cast<CheckRecord*>(list[currentItem]);
@@ -127,8 +120,11 @@ void MainWindow::on_SaveChanges_clicked()
     ui->DateAndTimeCheck->date().year());
     ui->diffEditCheck->setEnabled(false);
     ui->DateAndTimeCheck->setEnabled(false);
+    ui->coffeelog->currentItem()->setText("["+QString::number(currentItem)+
+    "] "+tmp->getText());
   }
- fillLog();
+ //fillLog();
+
 }
 
 void MainWindow::setEnabledRecordEdits(bool enabled){
@@ -231,10 +227,10 @@ void MainWindow::on_deleteButton_clicked()
       list.del(currentItem);
       currentItem = -1;
       fillLog();
-    setEnabledCheckEdits(false);
-    setEnabledRecordEdits(false);
-    emptyRecordEdits();
-    ui->SaveChanges->hide();
+      setEnabledCheckEdits(false);
+      setEnabledRecordEdits(false);
+      emptyRecordEdits();
+      ui->SaveChanges->hide();
     }
 }
 

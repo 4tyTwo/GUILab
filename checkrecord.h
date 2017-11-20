@@ -12,6 +12,7 @@ public:
   void setRemaining(int remain);
   virtual int isBase();
   virtual ~CheckRecord();
+  QString getText();
 private:
   int remaining;
 };

@@ -107,6 +107,16 @@ void Record::copy(Record object){
     accessTime = object.accessTime;
 }
 
+QString Record::getText(){
+  timeSt curr = accessTime;
+  return QString(firstName+" "+lastName
+  +" "+patronymic+" "+degree+" "+position
+  +" "+QString::number(coffeeDiff)+"ml Time: "
+  +QString::number(curr.hours)+":"+QString::number(curr.minutes)+" Date: "+
+  QString::number(curr.day)+"/"+QString::number(curr.month)+"/"
+  +QString::number(curr.year));
+}
+
 int Record::isBase(){
   return 0;
 }
